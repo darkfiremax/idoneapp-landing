@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IdoneApp — Encuentra tu pareja adventista</title>
+  <meta name="description" content="La primera app de citas para adventistas. Conexiones reales, valores compartidos. Únete a la lista de espera y recibe 30 días premium gratis." />
+
+  <!-- Google Sans Flex (la fuente de la app) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            primary:   '#4A1060',
+            primary2:  '#7B3F9E',
+            coral:     '#C96868',
+            coral2:    '#E8A0A0',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Carousel ─────────────────────────────────────────── */
+    .carousel-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      will-change: opacity;
+    }
+    .carousel-bg.active { opacity: 1; }
+
+    .slide-1 { background-image: url('images/1.1.png'); }
+    .slide-2 { background-image: url('images/1.2.png'); }
+    .slide-3 { background-image: url('images/1.3.png'); }
+    .slide-4 { background-image: url('images/1.4.png'); }
+
+    /* ── Overlay sobre el carrusel ────────────────────────── */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(20, 5, 28, 0.55) 0%,
+        rgba(20, 5, 28, 0.65) 50%,
+        rgba(20, 5, 28, 0.90) 100%
+      );
+    }
+
+    /* ── Animaciones ──────────────────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in   { animation: fadeInUp 0.8s ease-out forwards; }
+    .delay-1   { animation: fadeInUp 0.8s ease-out 0.15s forwards; opacity: 0; }
+    .delay-2   { animation: fadeInUp 0.8s ease-out 0.30s forwards; opacity: 0; }
+    .delay-3   { animation: fadeInUp 0.8s ease-out 0.45s forwards; opacity: 0; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    .float { animation: float 4s ease-in-out infinite; }
+
+    /* ── Glow ─────────────────────────────────────────────── */
+    .glow-coral  { box-shadow: 0 0 32px rgba(201, 104, 104, 0.40); }
+    .glow-purple { box-shadow: 0 0 32px rgba(74,  16,  96, 0.50); }
+
+    /* ── Gradient text ────────────────────────────────────── */
+    .gradient-text {
+      background: linear-gradient(90deg, #E8A0A0 0%, #C96868 50%, #7B3F9E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Feature cards ────────────────────────────────────── */
+    .feature-card {
+      background: linear-gradient(145deg, rgba(74,16,96,0.20) 0%, rgba(201,104,104,0.06) 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      border-color: rgba(201, 104, 104, 0.25);
+      transform: translateY(-3px);
+    }
+
+    /* ── Input focus ──────────────────────────────────────── */
+    input:focus { outline: none; border-color: rgba(201,104,104,0.60); }
+
+    /* ── Carousel dots ────────────────────────────────────── */
+    .dot { transition: background 0.3s, width 0.3s; }
+    .dot.active { background: #C96868; width: 24px; }
+  </style>
+</head>
+
+<body class="font-sans bg-[#14051C] text-white antialiased overflow-x-hidden">
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAV
+  ════════════════════════════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between backdrop-blur-md bg-black/25 border-b border-white/5">
+    <div class="flex items-center gap-3">
+      <img src="icon.png" alt="IdoneApp" class="w-9 h-9 rounded-xl" />
+      <span class="font-bold text-lg tracking-tight">IdoneApp</span>
+    </div>
+    <a href="#waitlist" class="text-sm font-semibold text-coral hover:text-coral2 transition-colors">
+      Unirse a la lista &rarr;
+    </a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO — fondo carrusel
+  ════════════════════════════════════════════════════════════ -->
+  <section class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-20 overflow-hidden">
+
+    <!-- Carrusel de fondo -->
+    <div id="carousel" class="absolute inset-0">
+      <div class="carousel-bg slide-1 active"></div>
+      <div class="carousel-bg slide-2"></div>
+      <div class="carousel-bg slide-3"></div>
+      <div class="carousel-bg slide-4"></div>
+    </div>
+
+    <!-- Overlay oscuro sobre el carrusel -->
+    <div class="hero-overlay"></div>
+
+    <!-- Contenido -->
+    <div class="relative z-10 max-w-2xl mx-auto text-center">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-coral/10 border border-coral/20 text-coral text-sm font-semibold mb-8 fade-in">
+        <span class="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
+        Próximamente &middot; Pre-lanzamiento
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 delay-1">
+        Encuentra tu ayuda<br />
+        <em class="gradient-text" style="font-family: 'Playfair Display', serif; font-style: italic;">idónea</em>
+        <span> en la fe</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg sm:text-xl text-white/65 leading-relaxed mb-10 max-w-xl mx-auto delay-2">
+        La primera app de citas diseñada exclusivamente para jóvenes adventistas colombianos.
+        Conecta con quien comparte tu fe, tus valores y tu estilo de vida.
+      </p>
+
+      <!-- Waitlist form -->
+      <div id="waitlist" class="delay-3">
+        <form id="waitlist-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="handleSubmit(event)" novalidate>
+          <div class="flex-1 relative">
+            <input
+              type="email"
+              id="email-input"
+              placeholder="tu@correo.com"
+              class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-white/35 transition-all text-sm"
+            />
+            <p id="email-error" class="hidden absolute left-0 top-full mt-1 text-xs text-coral bg-[#14051C]/90 border border-coral/30 rounded-xl px-3 py-1.5"></p>
+          </div>
+          <button
+            type="submit"
+            class="px-6 py-4 rounded-2xl bg-coral hover:bg-[#b85d5d] text-white font-bold text-sm transition-all glow-coral whitespace-nowrap active:scale-95"
+          >
+            Quiero mi lugar &rarr;
+          </button>
+        </form>
+
+        <p class="text-white/35 text-xs mt-4">
+          🎁 Los primeros en registrarse reciben <strong class="text-white/55">30 días premium gratis</strong>
+        </p>
+
+        <div id="success-msg" class="hidden mt-6 p-4 rounded-2xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium">
+          ✅ ¡Listo! Te avisamos cuando abramos. Revisa tu correo.
+        </div>
+      </div>
+
+      <!-- Dots del carrusel -->
+      <div class="flex items-center justify-center gap-2 mt-12">
+        <div class="dot h-2 w-6 rounded-full bg-coral active"></div>
+        <div class="dot h-2 w-2 rounded-full bg-white/30"></div>
+        <div class="dot h-2 w-2 rounded-full bg-white/30"></div>
+        <div class="dot h-2 w-2 rounded-full bg-white/30"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FEATURES
+  ════════════════════════════════════════════════════════════ -->
+  <section class="py-24 px-6" style="background-color: #FFF8F5;">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-[#14051C]">
+          Hecho para adventistas,<br/>por adventistas
+        </h2>
+        <p class="text-[#14051C]/50 text-lg">Entendemos tu fe y tu cultura</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <div class="rounded-3xl p-6 bg-white border border-[#E8D5F0] hover:border-coral/40 hover:-translate-y-1 transition-all duration-200" style="box-shadow: 0 2px 16px rgba(74,16,96,0.07)">
+          <div class="text-3xl mb-4">⛪</div>
+          <h3 class="font-bold text-lg mb-2 text-[#14051C]">Filtros de iglesia</h3>
+          <p class="text-[#14051C]/50 text-sm leading-relaxed">Filtra por unión, asociación, iglesia local y ministerios. Conecta con alguien de tu comunidad.</p>
+        </div>
+
+        <div class="rounded-3xl p-6 bg-white border border-[#E8D5F0] hover:border-coral/40 hover:-translate-y-1 transition-all duration-200" style="box-shadow: 0 2px 16px rgba(74,16,96,0.07)">
+          <div class="text-3xl mb-4">🥗</div>
+          <h3 class="font-bold text-lg mb-2 text-[#14051C]">Estilo de vida</h3>
+          <p class="text-[#14051C]/50 text-sm leading-relaxed">Vegetariano, vegano, ovolactovegetariano… encuentra a alguien con tu misma dieta y hábitos.</p>
+        </div>
+
+        <div class="rounded-3xl p-6 bg-white border border-[#E8D5F0] hover:border-coral/40 hover:-translate-y-1 transition-all duration-200" style="box-shadow: 0 2px 16px rgba(74,16,96,0.07)">
+          <div class="text-3xl mb-4">💬</div>
+          <h3 class="font-bold text-lg mb-2 text-[#14051C]">Chat en tiempo real</h3>
+          <p class="text-[#14051C]/50 text-sm leading-relaxed">Cuando hay match, pueden chatear de inmediato. Sin filtros, sin límites artificiales.</p>
+        </div>
+
+        <div class="rounded-3xl p-6 bg-white border border-[#E8D5F0] hover:border-coral/40 hover:-translate-y-1 transition-all duration-200" style="box-shadow: 0 2px 16px rgba(74,16,96,0.07)">
+          <div class="text-3xl mb-4">🛡️</div>
+          <h3 class="font-bold text-lg mb-2 text-[#14051C]">Perfiles verificados</h3>
+          <p class="text-[#14051C]/50 text-sm leading-relaxed">Verificación de identidad para que sepas que estás hablando con personas reales.</p>
+        </div>
+
+        <div class="rounded-3xl p-6 bg-white border border-[#E8D5F0] hover:border-coral/40 hover:-translate-y-1 transition-all duration-200" style="box-shadow: 0 2px 16px rgba(74,16,96,0.07)">
+          <div class="text-3xl mb-4">🎯</div>
+          <h3 class="font-bold text-lg mb-2 text-[#14051C]">Intereses en común</h3>
+          <p class="text-[#14051C]/50 text-sm leading-relaxed">14 categorías de intereses y 11 idiomas. Encuentra alguien que comparta lo que te apasiona.</p>
+        </div>
+
+        <div class="rounded-3xl p-6 bg-white border border-[#E8D5F0] hover:border-coral/40 hover:-translate-y-1 transition-all duration-200" style="box-shadow: 0 2px 16px rgba(74,16,96,0.07)">
+          <div class="text-3xl mb-4">📱</div>
+          <h3 class="font-bold text-lg mb-2 text-[#14051C]">Web y móvil</h3>
+          <p class="text-[#14051C]/50 text-sm leading-relaxed">Úsala desde el navegador ahora. Próximamente en App Store y Google Play.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PREMIUM / PRICING
+  ════════════════════════════════════════════════════════════ -->
+  <section class="py-24 px-6 bg-[#14051C]">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+      <!-- Izquierda: copy -->
+      <div>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-coral/10 border border-coral/20 text-coral text-sm font-semibold mb-8">
+          <span class="w-2 h-2 rounded-full bg-coral"></span>
+          Premium
+        </div>
+        <h2 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-5">
+          Descubre quién<br/>
+          <em class="gradient-text" style="font-family: 'Playfair Display', serif; font-style: italic;">ya te eligió</em>
+        </h2>
+        <p class="text-white/50 text-base mb-8 leading-relaxed">
+          El valor premium no es información — es saber que alguien ya te aprobó antes de que tú lo sepas.
+        </p>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-coral/15 border border-coral/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-coral" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="text-white/70 text-sm"><strong class="text-white">Ve quién te dio Like</strong> — el número está ahí, solo falta saber quién</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-coral/15 border border-coral/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-coral" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="text-white/70 text-sm"><strong class="text-white">Swipes ilimitados</strong> — sin límite diario</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-coral/15 border border-coral/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-coral" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="text-white/70 text-sm"><strong class="text-white">Escríbele sin match</strong> — 1 nota por semana a quien quieras</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-coral/15 border border-coral/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-coral" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="text-white/70 text-sm"><strong class="text-white">Filtros avanzados</strong> — por iglesia, club, dieta y más</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-coral/15 border border-coral/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-coral" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="text-white/70 text-sm"><strong class="text-white">Boost semanal</strong> — aparece primero en el stack 30 minutos</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Derecha: card de precio -->
+      <div class="rounded-3xl p-8 glow-purple" style="background: linear-gradient(145deg, rgba(74,16,96,0.40) 0%, rgba(201,104,104,0.12) 100%); border: 1px solid rgba(123,63,158,0.30);">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-coral/10 border border-coral/20 text-coral text-xs font-bold mb-6">
+          MÁS POPULAR
+        </div>
+
+        <div class="mb-6 pb-6 border-b border-white/10">
+          <span class="text-6xl font-extrabold text-white">$4.99</span>
+          <p class="text-white/40 text-sm mt-2">USD / mes · cancela cuando quieras</p>
+        </div>
+
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-3 text-sm text-white/70">
+            <span class="text-coral font-bold">✦</span> Ve quién te dio Like
+          </li>
+          <li class="flex items-center gap-3 text-sm text-white/70">
+            <span class="text-coral font-bold">✦</span> Swipes ilimitados cada día
+          </li>
+          <li class="flex items-center gap-3 text-sm text-white/70">
+            <span class="text-coral font-bold">✦</span> 5 Super Likes por semana
+          </li>
+          <li class="flex items-center gap-3 text-sm text-white/70">
+            <span class="text-coral font-bold">✦</span> Rewind — deshaz el último swipe
+          </li>
+          <li class="flex items-center gap-3 text-sm text-white/70">
+            <span class="text-coral font-bold">✦</span> Filtros por iglesia y club
+          </li>
+          <li class="flex items-center gap-3 text-sm text-white/70">
+            <span class="text-coral font-bold">✦</span> Insignia de perfil verificado
+          </li>
+        </ul>
+
+        <div class="rounded-2xl p-4 bg-coral/10 border border-coral/20">
+          <p class="text-sm text-coral/90">
+            🎁 <strong class="text-coral">Primeros 100 usuarios:</strong> 1 mes de Premium completamente gratis. Sin tarjeta de crédito requerida.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CÓMO FUNCIONA
+  ════════════════════════════════════════════════════════════ -->
+  <section class="py-24 px-6" style="background-color: #F5F0FF;">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-[#14051C]">¿Cómo funciona?</h2>
+      <p class="text-[#14051C]/50 text-lg mb-16">Simple, rápido y sin complicaciones</p>
+
+      <div class="grid sm:grid-cols-3 gap-8">
+        <div class="flex flex-col items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-2xl font-extrabold text-coral" style="box-shadow: 0 0 24px rgba(74,16,96,0.15)">1</div>
+          <h3 class="font-semibold text-[#14051C]">Crea tu perfil</h3>
+          <p class="text-[#14051C]/45 text-sm">Sube fotos, cuenta tu historia y comparte tu fe y valores</p>
+        </div>
+        <div class="flex flex-col items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-2xl font-extrabold text-coral" style="box-shadow: 0 0 24px rgba(74,16,96,0.15)">2</div>
+          <h3 class="font-semibold text-[#14051C]">Descubre personas</h3>
+          <p class="text-[#14051C]/45 text-sm">Swipe para conocer adventistas cerca de ti con filtros personalizados</p>
+        </div>
+        <div class="flex flex-col items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-2xl font-extrabold text-coral" style="box-shadow: 0 0 24px rgba(74,16,96,0.15)">3</div>
+          <h3 class="font-semibold text-[#14051C]">Haz match y chatea</h3>
+          <p class="text-[#14051C]/45 text-sm">Cuando hay interés mutuo, empieza la conversación de inmediato</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FINAL CTA
+  ════════════════════════════════════════════════════════════ -->
+  <section class="py-24 px-6 bg-[#14051C]">
+    <div class="max-w-lg mx-auto text-center">
+      <div class="rounded-3xl p-10 glow-purple" style="background: linear-gradient(145deg, rgba(74,16,96,0.35) 0%, rgba(201,104,104,0.10) 100%); border: 1px solid rgba(123,63,158,0.25)">
+        <p class="text-coral font-bold text-sm mb-3 tracking-wider">OFERTA DE LANZAMIENTO</p>
+        <h2 class="text-3xl font-extrabold mb-3">30 días premium gratis</h2>
+        <p class="text-white/50 mb-8">Para los primeros en unirse a la lista de espera. Sin tarjeta de crédito.</p>
+        <form class="flex flex-col gap-3" onsubmit="handleSubmit(event)" novalidate>
+          <div class="relative">
+            <input
+              type="email"
+              placeholder="tu@correo.com"
+              class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-white/35 transition-all text-sm"
+            />
+            <p class="cta-error hidden absolute left-0 top-full mt-1 text-xs text-coral bg-[#14051C]/90 border border-coral/30 rounded-xl px-3 py-1.5"></p>
+          </div>
+          <button
+            type="submit"
+            class="px-6 py-4 rounded-2xl bg-coral hover:bg-[#b85d5d] text-white font-bold text-sm transition-all glow-coral active:scale-95"
+          >
+            Reservar mi lugar gratis
+          </button>
+        </form>
+        <p class="text-white/25 text-xs mt-4">Sin spam. Solo te avisamos cuando abramos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════════════════ -->
+  <footer class="py-10 px-6 border-t border-white/5 bg-[#14051C]">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-white/30 text-sm">
+      <div class="flex items-center gap-2">
+        <img src="icon.png" alt="IdoneApp" class="w-6 h-6 rounded-lg opacity-70" />
+        <span>IdoneApp &middot; 2026</span>
+      </div>
+      <p>Hecho con ❤️ por <span class="text-white/50">Jonathan Pacheco</span></p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SCRIPTS
+  ════════════════════════════════════════════════════════════ -->
+  <script>
+    // ── Carousel automático ────────────────────────────────
+    const slides = document.querySelectorAll('.carousel-bg');
+    const dots   = document.querySelectorAll('.dot');
+    let current  = 0;
+
+    function nextSlide() {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active', 'w-6');
+      dots[current].classList.add('w-2');
+
+      current = (current + 1) % slides.length;
+
+      slides[current].classList.add('active');
+      dots[current].classList.add('active', 'w-6');
+      dots[current].classList.remove('w-2');
+    }
+
+    setInterval(nextSlide, 4500);
+
+    // ── Validación de email en español ────────────────────
+    function validateEmail(input, errorEl) {
+      const val = input.value.trim();
+      if (!val) {
+        showError(errorEl, 'Por favor ingresa tu correo electrónico.');
+        input.classList.add('border-coral/60');
+        return false;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        showError(errorEl, 'Ingresa un correo válido. Ej: nombre@correo.com');
+        input.classList.add('border-coral/60');
+        return false;
+      }
+      clearError(errorEl);
+      input.classList.remove('border-coral/60');
+      return true;
+    }
+
+    function showError(el, msg) {
+      el.textContent = msg;
+      el.classList.remove('hidden');
+    }
+
+    function clearError(el) {
+      el.classList.add('hidden');
+      el.textContent = '';
+    }
+
+    // ── Waitlist form ──────────────────────────────────────
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form    = e.target;
+      const input   = form.querySelector('input[type="email"]');
+      const errorEl = form.querySelector('[id$="email-error"], .cta-error');
+
+      if (!validateEmail(input, errorEl)) return;
+
+      const email = input.value.trim();
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+
+      btn.disabled = true;
+      btn.textContent = 'Registrando...';
+
+      fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          const successMsg = document.getElementById('success-msg');
+          const mainForm   = document.getElementById('waitlist-form');
+          if (successMsg && mainForm && form === mainForm) {
+            mainForm.style.display = 'none';
+            successMsg.classList.remove('hidden');
+          } else {
+            form.innerHTML = '<p class="text-green-400 font-semibold">✅ ¡Listo! Te avisamos cuando abramos.</p>';
+          }
+        } else {
+          showError(errorEl, data.error || 'Error al registrar');
+          btn.disabled = false;
+          btn.textContent = originalText;
+        }
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        showError(errorEl, 'Error de conexión. Intenta de nuevo.');
+        btn.disabled = false;
+        btn.textContent = originalText;
+      });
+    }
+
+    // Limpiar error al escribir
+    document.querySelectorAll('input[type="email"]').forEach(input => {
+      input.addEventListener('input', () => {
+        const errorEl = input.closest('form').querySelector('[id$="email-error"], .cta-error');
+        if (errorEl) clearError(errorEl);
+        input.classList.remove('border-coral/60');
+      });
+    });
+  </script>
+
+</body>
+</html>
