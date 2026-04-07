@@ -63,6 +63,7 @@ export default async function handler(req, res) {
           <!-- Header -->
           <tr>
             <td align="center" style="padding:40px 40px 32px;">
+              <img src="https://idoneapp.com/icon.png" alt="IdoneApp" width="64" height="64" style="border-radius:16px;display:block;margin:0 auto 16px;" />
               <p style="margin:0;font-size:28px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">
                 Idone<span style="color:#C96868;">App</span>
               </p>
