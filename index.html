@@ -163,22 +163,32 @@
 
       <!-- Waitlist form -->
       <div id="waitlist" class="delay-3">
-        <form id="waitlist-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="handleSubmit(event)" novalidate>
-          <div class="flex-1 relative">
+        <form id="waitlist-form" class="flex flex-col gap-3 max-w-md mx-auto" onsubmit="handleSubmit(event)" novalidate>
+          <div class="relative">
             <input
-              type="email"
-              id="email-input"
-              placeholder="tu@correo.com"
+              type="text"
+              id="name-input"
+              placeholder="Tu nombre"
               class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-white/35 transition-all text-sm"
             />
-            <p id="email-error" class="hidden absolute left-0 top-full mt-1 text-xs text-coral bg-[#14051C]/90 border border-coral/30 rounded-xl px-3 py-1.5"></p>
           </div>
-          <button
-            type="submit"
-            class="px-6 py-4 rounded-2xl bg-coral hover:bg-[#b85d5d] text-white font-bold text-sm transition-all glow-coral whitespace-nowrap active:scale-95"
-          >
-            Quiero mi lugar &rarr;
-          </button>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <div class="flex-1 relative">
+              <input
+                type="email"
+                id="email-input"
+                placeholder="tu@correo.com"
+                class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-white/35 transition-all text-sm"
+              />
+              <p id="email-error" class="hidden absolute left-0 top-full mt-1 text-xs text-coral bg-[#14051C]/90 border border-coral/30 rounded-xl px-3 py-1.5"></p>
+            </div>
+            <button
+              type="submit"
+              class="px-6 py-4 rounded-2xl bg-coral hover:bg-[#b85d5d] text-white font-bold text-sm transition-all glow-coral whitespace-nowrap active:scale-95"
+            >
+              Quiero mi lugar &rarr;
+            </button>
+          </div>
         </form>
 
         <p class="text-white/35 text-xs mt-4">
@@ -388,6 +398,11 @@
         <h2 class="text-3xl font-extrabold mb-3">30 días premium gratis</h2>
         <p class="text-white/50 mb-8">Para los primeros en unirse a la lista de espera. Sin tarjeta de crédito.</p>
         <form class="flex flex-col gap-3" onsubmit="handleSubmit(event)" novalidate>
+          <input
+            type="text"
+            placeholder="Tu nombre"
+            class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-white/35 transition-all text-sm"
+          />
           <div class="relative">
             <input
               type="email"
@@ -477,11 +492,13 @@
       e.preventDefault();
       const form    = e.target;
       const input   = form.querySelector('input[type="email"]');
+      const nameInput = form.querySelector('input[type="text"]');
       const errorEl = form.querySelector('[id$="email-error"], .cta-error');
 
       if (!validateEmail(input, errorEl)) return;
 
       const email = input.value.trim();
+      const name  = nameInput ? nameInput.value.trim() : '';
       const btn = form.querySelector('button[type="submit"]');
       const originalText = btn.textContent;
 
@@ -491,7 +508,7 @@
       fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, name })
       })
       .then(res => res.json())
       .then(data => {
