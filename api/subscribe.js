@@ -3,7 +3,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
-  const { email, name } = req.body;
+  const { email, name, _hp, _t } = req.body;
+
+  // Anti-spam: honeypot — si el campo oculto tiene algo, es un bot
+  if (_hp && _hp.length > 0) {
+    return res.status(200).json({ success: true }); // respuesta falsa para no delatar
+  }
+
+  // Anti-spam: time check — menos de 2 segundos desde que cargó la página = bot
+  if (typeof _t === 'number' && _t < 2000) {
+    return res.status(200).json({ success: true }); // respuesta falsa
+  }
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Email inválido' });
@@ -58,12 +68,23 @@ export default async function handler(req, res) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>¡Bienvenido a IdoneApp!</title>
+  <meta name="color-scheme" content="light dark" />
+  <meta name="supported-color-schemes" content="light dark" />
+  <style>
+    :root { color-scheme: light dark; }
+    /* Prevent Gmail auto dark mode from transforming our intentional dark design */
+    [data-ogsc] body, [data-ogsb] body { background-color: #0D0118 !important; }
+    @media (prefers-color-scheme: dark) {
+      body { background-color: #0D0118 !important; }
+      .email-wrapper { background: linear-gradient(145deg,#1a0530,#2a0a40) !important; }
+    }
+  </style>
 </head>
 <body style="margin:0;padding:0;background-color:#0D0118;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0D0118;padding:40px 16px;">
     <tr>
       <td align="center">
-        <table width="100%" style="max-width:520px;background:linear-gradient(145deg,#1a0530,#2a0a40);border-radius:24px;border:1px solid rgba(123,63,158,0.3);overflow:hidden;">
+        <table class="email-wrapper" width="100%" style="max-width:520px;background:linear-gradient(145deg,#1a0530,#2a0a40);border-radius:24px;border:1px solid rgba(123,63,158,0.3);overflow:hidden;">
 
           <!-- Header -->
           <tr>

@@ -164,6 +164,8 @@
       <!-- Waitlist form -->
       <div id="waitlist" class="delay-3">
         <form id="waitlist-form" class="flex flex-col gap-3 max-w-md mx-auto" onsubmit="handleSubmit(event)" novalidate>
+          <!-- Honeypot: invisible para humanos, los bots lo llenan -->
+          <input type="text" name="website" id="hp-field" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
           <div class="relative">
             <input
               type="text"
@@ -398,6 +400,8 @@
         <h2 class="text-3xl font-extrabold mb-3">30 días premium gratis</h2>
         <p class="text-white/50 mb-8">Para los primeros en unirse a la lista de espera. Sin tarjeta de crédito.</p>
         <form class="flex flex-col gap-3" onsubmit="handleSubmit(event)" novalidate>
+          <!-- Honeypot -->
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
           <input
             type="text"
             placeholder="Tu nombre"
@@ -440,6 +444,9 @@
        SCRIPTS
   ════════════════════════════════════════════════════════════ -->
   <script>
+    // ── Anti-spam: timestamp de carga de página ───────────
+    const _pageLoadTime = Date.now();
+
     // ── Carousel automático ────────────────────────────────
     const slides = document.querySelectorAll('.carousel-bg');
     const dots   = document.querySelectorAll('.dot');
@@ -499,6 +506,9 @@
 
       const email = input.value.trim();
       const name  = nameInput ? nameInput.value.trim() : '';
+      const honeypot = form.querySelector('input[name="website"]');
+      const hp = honeypot ? honeypot.value : '';
+      const elapsed = Date.now() - _pageLoadTime;
       const btn = form.querySelector('button[type="submit"]');
       const originalText = btn.textContent;
 
@@ -508,7 +518,7 @@
       fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name })
+        body: JSON.stringify({ email, name, _hp: hp, _t: elapsed })
       })
       .then(res => res.json())
       .then(data => {
