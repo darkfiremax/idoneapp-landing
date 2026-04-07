@@ -206,10 +206,10 @@
 
       <!-- Dots del carrusel -->
       <div class="flex items-center justify-center gap-2 mt-12">
-        <div class="dot h-2 w-6 rounded-full bg-coral active"></div>
-        <div class="dot h-2 w-2 rounded-full bg-white/30"></div>
-        <div class="dot h-2 w-2 rounded-full bg-white/30"></div>
-        <div class="dot h-2 w-2 rounded-full bg-white/30"></div>
+        <div class="dot h-2 w-6 rounded-full bg-coral active cursor-pointer" onclick="goToSlide(0)"></div>
+        <div class="dot h-2 w-2 rounded-full bg-white/30 cursor-pointer" onclick="goToSlide(1)"></div>
+        <div class="dot h-2 w-2 rounded-full bg-white/30 cursor-pointer" onclick="goToSlide(2)"></div>
+        <div class="dot h-2 w-2 rounded-full bg-white/30 cursor-pointer" onclick="goToSlide(3)"></div>
       </div>
     </div>
 
@@ -531,16 +531,20 @@
     const dots   = document.querySelectorAll('.dot');
     let current  = 0;
 
-    function nextSlide() {
+    function goToSlide(index) {
       slides[current].classList.remove('active');
       dots[current].classList.remove('active', 'w-6');
       dots[current].classList.add('w-2');
 
-      current = (current + 1) % slides.length;
+      current = index;
 
       slides[current].classList.add('active');
       dots[current].classList.add('active', 'w-6');
       dots[current].classList.remove('w-2');
+    }
+
+    function nextSlide() {
+      goToSlide((current + 1) % slides.length);
     }
 
     setInterval(nextSlide, 4500);
