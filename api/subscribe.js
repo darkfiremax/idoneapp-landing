@@ -46,6 +46,11 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         sender: { name: 'IdoneApp', email: 'no-reply@idoneapp.com' },
         to: [{ email, name: name || email }],
+        replyTo: { email: 'hola@idoneapp.com', name: 'IdoneApp' },
+        headers: {
+          'List-Unsubscribe': `<https://idoneapp.com/unsubscribe?email=${encodeURIComponent(email)}>`,
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+        },
         subject: '¡Tu lugar está reservado! 🎉',
         htmlContent: `<!DOCTYPE html>
 <html lang="es">
@@ -102,9 +107,10 @@ export default async function handler(req, res) {
           <!-- Footer -->
           <tr>
             <td style="padding:24px 40px;border-top:1px solid rgba(255,255,255,0.07);">
-              <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.25);text-align:center;line-height:1.6;">
+              <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.25);text-align:center;line-height:1.8;">
                 IdoneApp · Hecho con ❤️ para la comunidad adventista<br/>
-                Recibiste este correo porque te registraste en idoneapp.com
+                Recibiste este correo porque te registraste en idoneapp.com<br/>
+                <a href="https://idoneapp.com/unsubscribe?email=${encodeURIComponent(email)}" style="color:rgba(255,255,255,0.2);text-decoration:underline;font-size:11px;">Cancelar suscripción</a>
               </p>
             </td>
           </tr>
