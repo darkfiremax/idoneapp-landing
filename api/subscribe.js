@@ -54,9 +54,9 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: { 'api-key': apiKey, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        sender: { name: 'IdoneApp', email: 'no-reply@idoneapp.com' },
+        sender: { name: 'idoneApp', email: 'no-reply@idoneapp.com' },
         to: [{ email, name: name || email }],
-        replyTo: { email: 'hola@idoneapp.com', name: 'IdoneApp' },
+        replyTo: { email: 'hola@idoneapp.com', name: 'idoneApp' },
         headers: {
           'List-Unsubscribe': `<https://idoneapp.com/unsubscribe?email=${encodeURIComponent(email)}>`,
           'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
@@ -67,7 +67,7 @@ export default async function handler(req, res) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>¡Bienvenido a IdoneApp!</title>
+  <title>¡Bienvenido a idoneApp!</title>
   <meta name="color-scheme" content="light dark" />
   <meta name="supported-color-schemes" content="light dark" />
   <style>
@@ -89,9 +89,9 @@ export default async function handler(req, res) {
           <!-- Header -->
           <tr>
             <td align="center" style="padding:40px 40px 32px;">
-              <img src="https://idoneapp.com/icon.png" alt="IdoneApp" width="64" height="64" style="border-radius:16px;display:block;margin:0 auto 16px;" />
+              <img src="https://idoneapp.com/icon.png" alt="idoneApp" width="64" height="64" style="border-radius:16px;display:block;margin:0 auto 16px;" />
               <p style="margin:0;font-size:28px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">
-                Idone<span style="color:#C96868;">App</span>
+                idone<span style="color:#C96868;">App</span>
               </p>
               <p style="margin:8px 0 0;font-size:13px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;">Pre-lanzamiento</p>
             </td>
@@ -104,7 +104,7 @@ export default async function handler(req, res) {
                 ${greeting},<br/>ya tienes tu lugar. ✨
               </p>
               <p style="margin:16px 0 0;font-size:15px;color:rgba(255,255,255,0.6);line-height:1.7;">
-                Eres uno de los primeros en unirte a <strong style="color:#fff;">IdoneApp</strong> — la primera app de citas para adventistas.
+                Eres uno de los primeros en unirte a <strong style="color:#fff;">idoneApp</strong> — la primera app de citas para adventistas.
                 Cuando abramos las puertas, serás de los primeros en entrar.
               </p>
 
@@ -129,7 +129,7 @@ export default async function handler(req, res) {
           <tr>
             <td style="padding:24px 40px;border-top:1px solid rgba(255,255,255,0.07);">
               <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.25);text-align:center;line-height:1.8;">
-                IdoneApp · Hecho con ❤️ para la comunidad adventista<br/>
+                idoneApp · Hecho con ❤️ para la comunidad adventista<br/>
                 Recibiste este correo porque te registraste en idoneapp.com<br/>
                 <a href="https://idoneapp.com/unsubscribe?email=${encodeURIComponent(email)}" style="color:rgba(255,255,255,0.2);text-decoration:underline;font-size:11px;">Cancelar suscripción</a>
               </p>
@@ -144,6 +144,64 @@ export default async function handler(req, res) {
 </html>`,
       }),
     });
+
+    // 3. Chequear milestones y notificar al fundador
+    const MILESTONES = [20, 50, 80, 100];
+    try {
+      const listRes = await fetch('https://api.brevo.com/v3/contacts/lists/3', {
+        headers: { 'api-key': apiKey },
+      });
+      if (listRes.ok) {
+        const listData = await listRes.json();
+        const total = listData.totalSubscribers || 0;
+        if (MILESTONES.includes(total)) {
+          await fetch('https://api.brevo.com/v3/smtp/email', {
+            method: 'POST',
+            headers: { 'api-key': apiKey, 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              sender: { name: 'idoneApp', email: 'no-reply@idoneapp.com' },
+              to: [{ email: 'firemax12@gmail.com', name: 'Jonathan' }],
+              subject: `🚀 ¡Ya llevas ${total} personas en idoneApp!`,
+              htmlContent: `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"/></head>
+<body style="margin:0;padding:0;background:#0D0118;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0D0118;padding:40px 16px;">
+    <tr><td align="center">
+      <table width="100%" style="max-width:500px;background:linear-gradient(145deg,#1a0530,#2a0a40);border-radius:24px;border:1px solid rgba(123,63,158,0.3);overflow:hidden;">
+        <tr><td style="padding:40px 40px 32px;">
+          <img src="https://idoneapp.com/icon.png" width="56" height="56" style="border-radius:14px;display:block;margin:0 auto 20px;"/>
+          <p style="margin:0 0 4px;font-size:13px;font-weight:700;color:#C96868;letter-spacing:2px;text-transform:uppercase;text-align:center;">Hito alcanzado 🎯</p>
+          <p style="margin:0 0 24px;font-size:42px;font-weight:800;color:#fff;text-align:center;line-height:1.1;">${total} personas</p>
+          <p style="margin:0 0 20px;font-size:16px;color:rgba(255,255,255,0.75);line-height:1.7;">
+            Ya llevas <strong style="color:#fff;">${total} adventistas</strong> esperando idoneApp.
+            Prepárate para ir liberando la app — la comunidad está lista para ti. 🚀
+          </p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:rgba(201,104,104,0.1);border:1px solid rgba(201,104,104,0.25);border-radius:16px;margin-bottom:24px;">
+            <tr><td style="padding:16px 20px;">
+              <p style="margin:0 0 4px;font-size:12px;color:#C96868;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Próximos pasos</p>
+              <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.6;">
+                ✦ Prepara el backend y los códigos promo<br/>
+                ✦ Activa las cuentas @idoneapp en redes<br/>
+                ✦ Cuando estés listo, envía la campaña de lanzamiento
+              </p>
+            </td></tr>
+          </table>
+          <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.3);text-align:center;">Último registro: ${name ? name + ' · ' : ''}${email}</p>
+        </td></tr>
+        <tr><td style="padding:20px 40px;border-top:1px solid rgba(255,255,255,0.07);">
+          <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.2);text-align:center;">idoneApp · Notificación automática de hito</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`,
+            }),
+          });
+        }
+      }
+    } catch (milestoneErr) {
+      console.error('Milestone error:', milestoneErr);
+    }
 
     return res.status(200).json({ success: true });
   } catch (error) {
