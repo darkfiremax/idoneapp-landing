@@ -296,28 +296,11 @@
         <p class="text-white/45 text-base">Sin sorpresas. Cancela cuando quieras.</p>
       </div>
 
-      <!-- Toggle mensual / anual -->
-      <div class="flex items-center justify-center gap-4 mb-10">
-        <span id="label-monthly" class="text-white font-semibold text-sm">Mensual</span>
-        <button
-          id="billing-toggle"
-          onclick="toggleBilling()"
-          class="relative w-14 h-7 rounded-full transition-all focus:outline-none"
-          style="background:rgba(123,63,158,0.5);border:1px solid rgba(123,63,158,0.4);"
-        >
-          <span id="toggle-knob" class="absolute top-1 left-1 w-5 h-5 rounded-full bg-white transition-transform duration-300"></span>
-        </button>
-        <span id="label-annual" class="text-white/45 text-sm flex items-center gap-2">
-          Anual
-          <span class="px-2 py-0.5 rounded-full bg-coral/15 border border-coral/30 text-coral text-xs font-bold">−30%</span>
-        </span>
-      </div>
-
       <!-- Cards -->
       <div class="grid md:grid-cols-2 gap-6 items-start">
 
-        <!-- FREE -->
-        <div class="rounded-3xl p-8" style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);">
+        <!-- FREE — en mobile va segundo (order-2), en desktop primero (md:order-1) -->
+        <div class="order-2 md:order-1 rounded-3xl p-8" style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);">
           <p class="text-white/75 text-xs font-bold tracking-widest uppercase mb-5">Gratis — siempre</p>
           <div class="mb-6 pb-6 border-b border-white/20">
             <span class="text-5xl font-extrabold text-white">$0</span>
@@ -358,8 +341,27 @@
           </div>
         </div>
 
-        <!-- PREMIUM -->
-        <div class="rounded-3xl p-8 glow-purple relative" style="background:linear-gradient(145deg,rgba(74,16,96,0.55) 0%,rgba(201,104,104,0.15) 100%);border:1px solid rgba(123,63,158,0.40);">
+        <!-- PREMIUM — en mobile va primero (order-1), en desktop segundo (md:order-2) -->
+        <div class="order-1 md:order-2 flex flex-col gap-4">
+
+          <!-- Toggle — visible siempre, pegado encima de la card Premium -->
+          <div class="flex items-center justify-center gap-4">
+            <span id="label-monthly" class="text-white font-semibold text-sm">Mensual</span>
+            <button
+              id="billing-toggle"
+              onclick="toggleBilling()"
+              class="relative w-14 h-7 rounded-full transition-all focus:outline-none"
+              style="background:rgba(123,63,158,0.5);border:1px solid rgba(123,63,158,0.4);"
+            >
+              <span id="toggle-knob" class="absolute top-1 left-1 w-5 h-5 rounded-full bg-white transition-transform duration-300"></span>
+            </button>
+            <span id="label-annual" class="text-white/45 text-sm flex items-center gap-2">
+              Anual
+              <span class="px-2 py-0.5 rounded-full bg-coral/15 border border-coral/30 text-coral text-xs font-bold">−30%</span>
+            </span>
+          </div>
+
+          <div class="rounded-3xl p-8 glow-purple relative" style="background:linear-gradient(145deg,rgba(74,16,96,0.55) 0%,rgba(201,104,104,0.15) 100%);border:1px solid rgba(123,63,158,0.40);">
           <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-coral text-white text-xs font-bold tracking-wider whitespace-nowrap">
             ✦ MÁS POPULAR
           </div>
@@ -419,7 +421,8 @@
           <div class="rounded-2xl p-4 bg-coral/10 border border-coral/20 text-center">
             <p class="text-sm text-coral font-semibold">🎁 Primeros 100: 1 mes gratis sin tarjeta</p>
           </div>
-        </div>
+        </div><!-- cierre card premium -->
+        </div><!-- cierre wrapper premium+toggle -->
 
       </div>
     </div>
