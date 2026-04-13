@@ -375,7 +375,7 @@
           onclick="setPricingPlan('anual')"
           class="px-5 py-2 rounded-xl text-sm font-semibold transition-all text-white/50 hover:text-white">
           Anual
-          <span class="ml-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-coral/20 text-coral">−30%</span>
+          <span class="anual-badge ml-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-coral/20 text-coral">−30%</span>
         </button>
       </div>
 
@@ -461,6 +461,21 @@
   </style>
 
   <script>
+    function setPricingPlan(plan) {
+      const isMensual = plan === 'mensual';
+      document.getElementById('price-mensual').classList.toggle('hidden', !isMensual);
+      document.getElementById('price-anual').classList.toggle('hidden', isMensual);
+      document.getElementById('toggle-mensual').className = 'px-5 py-2 rounded-xl text-sm font-semibold transition-all ' + (isMensual ? 'pricing-toggle-active' : 'text-white/50 hover:text-white');
+      document.getElementById('toggle-anual').className = 'px-5 py-2 rounded-xl text-sm font-semibold transition-all ' + (!isMensual ? 'pricing-toggle-active' : 'text-white/50 hover:text-white');
+      // Restore badge text inside anual button
+      const anualBtn = document.getElementById('toggle-anual');
+      const badge = anualBtn.querySelector('.anual-badge');
+      if (!badge) {
+        anualBtn.innerHTML = 'Anual <span class="anual-badge ml-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-coral/20 text-coral">−30%</span>';
+      }
+      document.getElementById('pricing-badge').textContent = isMensual ? 'LANZAMIENTO' : 'MÁS POPULAR';
+    }
+
     function toggleFaq(btn) {
       const body = btn.nextElementSibling;
       const icon = btn.querySelector('.faq-icon');
