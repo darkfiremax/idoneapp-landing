@@ -355,6 +355,124 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
+       PRICING
+  ════════════════════════════════════════════════════════════ -->
+  <section class="py-24 px-6 bg-[#0E0318]" id="pricing">
+    <div class="max-w-xl mx-auto text-center">
+
+      <p class="text-coral font-bold text-sm mb-3 tracking-wider">PLANES</p>
+      <h2 class="text-3xl font-extrabold mb-2">Simple y transparente</h2>
+      <p class="text-white/45 mb-10">Conectar siempre será gratis. El premium desbloquea todo.</p>
+
+      <!-- Toggle mensual / anual -->
+      <div class="inline-flex items-center gap-3 mb-10 bg-white/5 rounded-2xl p-1.5 border border-white/10">
+        <button id="toggle-mensual"
+          onclick="setPricingPlan('mensual')"
+          class="px-5 py-2 rounded-xl text-sm font-semibold transition-all pricing-toggle-active">
+          Mensual
+        </button>
+        <button id="toggle-anual"
+          onclick="setPricingPlan('anual')"
+          class="px-5 py-2 rounded-xl text-sm font-semibold transition-all text-white/50 hover:text-white">
+          Anual
+          <span class="ml-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-coral/20 text-coral">−30%</span>
+        </button>
+      </div>
+
+      <!-- Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+        <!-- Free -->
+        <div class="rounded-3xl p-7 text-left" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08)">
+          <p class="text-white/40 text-xs font-bold tracking-wider mb-4">GRATIS</p>
+          <div class="flex items-end gap-1 mb-1">
+            <span class="text-4xl font-extrabold">$0</span>
+          </div>
+          <p class="text-white/30 text-xs mb-6">Para siempre</p>
+          <ul class="space-y-3 text-sm text-white/65 mb-8">
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Crear perfil</li>
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Ver perfiles</li>
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> 5 likes por día</li>
+            <li class="flex items-center gap-2"><span class="text-white/25 font-bold">✗</span> <span class="text-white/30">Likes ilimitados</span></li>
+            <li class="flex items-center gap-2"><span class="text-white/25 font-bold">✗</span> <span class="text-white/30">Ver quién te dio like</span></li>
+            <li class="flex items-center gap-2"><span class="text-white/25 font-bold">✗</span> <span class="text-white/30">Filtros avanzados</span></li>
+          </ul>
+          <a href="https://app.idoneapp.com" class="block text-center py-3 rounded-2xl text-sm font-semibold border border-white/15 text-white/60 hover:border-white/30 hover:text-white transition-all">
+            Empezar gratis
+          </a>
+        </div>
+
+        <!-- Premium -->
+        <div class="rounded-3xl p-7 text-left relative overflow-hidden glow-purple" style="background: linear-gradient(145deg, rgba(74,16,96,0.50) 0%, rgba(201,104,104,0.12) 100%); border: 1px solid rgba(123,63,158,0.40)">
+          <!-- Badge -->
+          <div class="absolute top-4 right-4 text-[10px] font-bold px-2.5 py-1 rounded-full bg-coral text-white tracking-wide" id="pricing-badge">
+            LANZAMIENTO
+          </div>
+
+          <p class="text-coral text-xs font-bold tracking-wider mb-4">PREMIUM</p>
+
+          <!-- Precio mensual -->
+          <div id="price-mensual" class="mb-6">
+            <div class="flex items-end gap-1 mb-1">
+              <span class="text-4xl font-extrabold">$19.999</span>
+              <span class="text-white/40 text-sm mb-1">COP/mes</span>
+            </div>
+            <p class="text-white/30 text-xs">Precio promocional de lanzamiento</p>
+          </div>
+
+          <!-- Precio anual -->
+          <div id="price-anual" class="mb-6 hidden">
+            <div class="flex items-end gap-2 mb-1">
+              <span class="text-4xl font-extrabold">$13.999</span>
+              <span class="text-white/40 text-sm mb-1">COP/mes</span>
+            </div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-white/35 text-sm line-through">$19.999</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">2 meses gratis</span>
+            </div>
+            <p class="text-white/30 text-xs">Facturado como <span class="font-semibold text-white/50">$167.990 COP/año</span> · Ahorras $71.998</p>
+          </div>
+
+          <ul class="space-y-3 text-sm text-white/80 mb-8">
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Todo lo del plan gratis</li>
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Likes ilimitados</li>
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Ver quién te dio like</li>
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Filtros avanzados</li>
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Verificación de perfil</li>
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Prioridad en descubrimiento</li>
+          </ul>
+          <a href="https://app.idoneapp.com" class="block text-center py-3 rounded-2xl text-sm font-bold bg-coral hover:bg-[#b85d5d] text-white transition-all glow-coral active:scale-95">
+            Obtener Premium →
+          </a>
+        </div>
+      </div>
+
+      <!-- Nota pie -->
+      <p class="text-white/25 text-xs mt-6">Pago 100% seguro · Cancela cuando quieras · Próximamente via Wompi</p>
+    </div>
+  </section>
+
+  <style>
+    .pricing-toggle-active {
+      background: rgba(201,104,104,0.20);
+      color: #E8A0A0;
+      border: 1px solid rgba(201,104,104,0.30);
+    }
+  </style>
+
+  <script>
+    function setPricingPlan(plan) {
+      const isMensual = plan === 'mensual';
+      document.getElementById('price-mensual').classList.toggle('hidden', !isMensual);
+      document.getElementById('price-anual').classList.toggle('hidden', isMensual);
+      document.getElementById('toggle-mensual').className = 'px-5 py-2 rounded-xl text-sm font-semibold transition-all ' + (isMensual ? 'pricing-toggle-active' : 'text-white/50 hover:text-white');
+      document.getElementById('toggle-anual').className = 'px-5 py-2 rounded-xl text-sm font-semibold transition-all ' + (!isMensual ? 'pricing-toggle-active' : 'text-white/50 hover:text-white');
+      document.getElementById('toggle-anual').innerHTML = 'Anual' + (!isMensual ? ' <span class="ml-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-coral/20 text-coral">−30%</span>' : ' <span class="ml-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-coral/20 text-coral">−30%</span>');
+      document.getElementById('pricing-badge').textContent = isMensual ? 'LANZAMIENTO' : 'MÁS POPULAR';
+    }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════
        FINAL CTA
   ════════════════════════════════════════════════════════════ -->
   <section class="py-24 px-6 bg-[#14051C]">
