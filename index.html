@@ -217,7 +217,7 @@
   <!-- ═══════════════════════════════════════════════════════
        NAV
   ════════════════════════════════════════════════════════════ -->
-  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between backdrop-blur-md bg-black/25 border-b border-white/5">
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between backdrop-blur-md bg-black/40 border-b border-white/5">
     <div class="flex items-center gap-3">
       <img src="icon.png" alt="idoneApp" class="w-9 h-9 rounded-xl" />
       <span class="text-lg tracking-tight"><span class="font-light">idone</span><span class="font-bold">App</span></span>
@@ -235,8 +235,8 @@
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
       </a>
       <!-- CTA — oculto en mobile, visible en sm+ -->
-      <a id="nav-cta" href="#name-input" onclick="document.getElementById('name-input').focus()" class="px-4 py-2 rounded-xl bg-coral/15 border border-coral/30 text-sm font-semibold text-coral hover:bg-coral/25 hover:border-coral/50 transition-all">
-        Unirse &rarr;
+      <a id="nav-cta" href="/app" class="px-4 py-2 rounded-xl bg-coral/15 border border-coral/30 text-sm font-semibold text-coral hover:bg-coral/25 hover:border-coral/50 transition-all">
+        Entrar a la app &rarr;
       </a>
       <!-- Hamburguesa — solo mobile -->
       <button id="hamburger" onclick="toggleMenu()" aria-label="Menú">
@@ -309,64 +309,42 @@
         Conecta con quien comparte tu fe, tus valores y tu estilo de vida.
       </p>
 
-      <!-- Waitlist form -->
+      <!-- Countdown -->
       <div id="waitlist" class="delay-3">
-        <form id="waitlist-form" class="flex flex-col gap-3 max-w-md mx-auto" onsubmit="handleSubmit(event)" novalidate>
-          <!-- Honeypot: invisible para humanos, los bots lo llenan -->
-          <input type="text" name="website" id="hp-field" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
-          <div class="relative">
-            <input
-              type="text"
-              id="name-input"
-              placeholder="Tu nombre"
-              style="scroll-margin-top: 160px;"
-              class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-white/35 transition-all text-sm input-pulse"
-            />
+        <!-- Countdown blocks -->
+        <div id="countdown-container" class="flex items-center justify-center gap-4 sm:gap-6 mb-8">
+          <div class="flex flex-col items-center">
+            <div class="text-4xl sm:text-6xl font-extrabold" id="countdown-dias" style="color: #C9963A;">00</div>
+            <p class="text-white/60 text-xs sm:text-sm mt-2">DÍAS</p>
           </div>
-          <div class="flex flex-col sm:flex-row gap-3">
-            <div class="flex-1 relative">
-              <input
-                type="email"
-                id="email-input"
-                placeholder="tu@correo.com"
-                class="w-full px-5 py-4 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-white/35 transition-all text-sm input-pulse"
-              />
-              <p id="email-error" class="hidden absolute left-0 top-full mt-1 text-xs text-coral bg-[#14051C]/90 border border-coral/30 rounded-xl px-3 py-1.5"></p>
-            </div>
-            <button
-              type="submit"
-              class="px-6 py-4 rounded-2xl bg-coral hover:bg-[#b85d5d] text-white font-bold text-sm transition-all glow-coral whitespace-nowrap active:scale-95"
-            >
-              Quiero mi lugar &rarr;
-            </button>
+          <div class="text-white/30 text-3xl sm:text-5xl font-light">:</div>
+          <div class="flex flex-col items-center">
+            <div class="text-4xl sm:text-6xl font-extrabold" id="countdown-horas" style="color: #C9963A;">00</div>
+            <p class="text-white/60 text-xs sm:text-sm mt-2">HORAS</p>
           </div>
-        </form>
-
-        <p class="text-white/35 text-xs mt-4">
-          Conectar siempre será gratis · funciones premium próximamente
-        </p>
-
-        <div class="mt-5 flex items-center justify-center gap-2">
-          <div class="flex -space-x-2">
-            <div class="w-7 h-7 rounded-full bg-primary2/60 border-2 border-[#14051C] flex items-center justify-center text-xs">💜</div>
-            <div class="w-7 h-7 rounded-full bg-coral/60 border-2 border-[#14051C] flex items-center justify-center text-xs">❤️</div>
-            <div class="w-7 h-7 rounded-full bg-primary/60 border-2 border-[#14051C] flex items-center justify-center text-xs">💜</div>
+          <div class="text-white/30 text-3xl sm:text-5xl font-light">:</div>
+          <div class="flex flex-col items-center">
+            <div class="text-4xl sm:text-6xl font-extrabold" id="countdown-min" style="color: #C9963A;">00</div>
+            <p class="text-white/60 text-xs sm:text-sm mt-2">MIN</p>
           </div>
-          <p class="text-white/50 text-xs">
-            <span id="subscriber-count" class="font-bold text-white">...</span> adventistas ya reservaron su lugar
-          </p>
+          <div class="text-white/30 text-3xl sm:text-5xl font-light">:</div>
+          <div class="flex flex-col items-center">
+            <div class="text-4xl sm:text-6xl font-extrabold" id="countdown-seg" style="color: #C9963A;">00</div>
+            <p class="text-white/60 text-xs sm:text-sm mt-2">SEG</p>
+          </div>
         </div>
 
-        <!-- Instagram nudge -->
-        <a href="https://www.instagram.com/idone.app" target="_blank" rel="noopener"
-           class="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:border-coral/30 hover:bg-coral/5 transition-all text-white/45 hover:text-coral text-xs group">
-          <svg class="w-4 h-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          Síguenos <span class="font-semibold text-white/60 group-hover:text-coral">@idone.app</span>
-        </a>
-
-        <div id="success-msg" class="hidden mt-6 p-4 rounded-2xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium">
-          ✅ ¡Listo! Te avisamos cuando abramos. Revisa tu correo.
+        <!-- When countdown = 0 -->
+        <div id="launch-ready" class="hidden text-center">
+          <p class="text-3xl sm:text-4xl font-extrabold mb-4">¡Ya está disponible! 🎉</p>
+          <a href="/app" class="inline-block px-8 py-4 rounded-2xl bg-coral hover:bg-[#b85d5d] text-white font-bold text-sm transition-all glow-coral active:scale-95">
+            Entrar a la app →
+          </a>
         </div>
+
+        <!-- Below countdown -->
+        <p class="text-white/60 text-sm mt-8 font-medium">Más de 300 adventistas esperando 🤍</p>
+        <p class="text-white/40 text-xs mt-1">Lanzamiento web · App Store y Google Play en mayo</p>
       </div>
 
       <!-- Dots del carrusel -->
@@ -804,7 +782,7 @@
           <a href="mailto:info@idoneapp.com" class="hover:text-white/50 transition-colors">Contacto</a>
         </div>
       </div>
-      <p class="text-white/20 text-xs">Hecho con ❤️ por <span class="text-white/40">Jonathan Pacheco</span></p>
+      <p class="text-white/20 text-xs">Hecho con ❤️ por <a href="https://instagram.com/soyjonathanpacheco" target="_blank" rel="noopener" class="text-white/40 hover:text-coral transition-colors">Jonathan Pacheco</a></p>
     </div>
   </footer>
 
@@ -833,20 +811,6 @@
       if (e.key === 'Escape') closeMenu();
     });
 
-    // ── Anti-spam: timestamp de carga de página ───────────
-    const _pageLoadTime = Date.now();
-
-    // ── Contador de suscriptores ───────────────────────────
-    fetch('/api/count')
-      .then(r => r.json())
-      .then(d => {
-        const el = document.getElementById('subscriber-count');
-        if (el && d.count !== undefined) el.textContent = d.count;
-      })
-      .catch(() => {
-        const el = document.getElementById('subscriber-count');
-        if (el) el.textContent = '0';
-      });
 
 
     // ── Carousel automático ────────────────────────────────
@@ -872,101 +836,6 @@
 
     setInterval(nextSlide, 4500);
 
-    // ── Validación de email en español ────────────────────
-    function validateEmail(input, errorEl) {
-      const val = input.value.trim();
-      if (!val) {
-        showError(errorEl, 'Por favor ingresa tu correo electrónico.');
-        input.classList.add('border-coral/60');
-        return false;
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-        showError(errorEl, 'Ingresa un correo válido. Ej: nombre@correo.com');
-        input.classList.add('border-coral/60');
-        return false;
-      }
-      clearError(errorEl);
-      input.classList.remove('border-coral/60');
-      return true;
-    }
-
-    function showError(el, msg) {
-      el.textContent = msg;
-      el.classList.remove('hidden');
-    }
-
-    function clearError(el) {
-      el.classList.add('hidden');
-      el.textContent = '';
-    }
-
-    // ── Waitlist form ──────────────────────────────────────
-    function handleSubmit(e) {
-      e.preventDefault();
-      const form    = e.target;
-      const input   = form.querySelector('input[type="email"]');
-      const nameInput = form.querySelector('input[type="text"]:not([name="website"])');
-      const errorEl = form.querySelector('[id$="email-error"], .cta-error');
-
-      if (!validateEmail(input, errorEl)) return;
-
-      const email = input.value.trim();
-      const name  = nameInput ? nameInput.value.trim() : '';
-      const honeypot = form.querySelector('input[name="website"]');
-      const hp = honeypot ? honeypot.value : '';
-      const elapsed = Date.now() - _pageLoadTime;
-      const btn = form.querySelector('button[type="submit"]');
-      const originalText = btn.textContent;
-
-      btn.disabled = true;
-      btn.textContent = 'Registrando...';
-
-      fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name, _hp: hp, _t: elapsed })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          const successMsg = document.getElementById('success-msg');
-          const mainForm   = document.getElementById('waitlist-form');
-          if (successMsg && mainForm && form === mainForm) {
-            mainForm.style.display = 'none';
-            successMsg.classList.remove('hidden');
-          } else {
-            form.innerHTML = '<p class="text-green-400 font-semibold">✅ ¡Listo! Te avisamos cuando abramos.</p>';
-          }
-        } else {
-          showError(errorEl, data.error || 'Error al registrar');
-          btn.disabled = false;
-          btn.textContent = originalText;
-        }
-      })
-      .catch(err => {
-        console.error('Error:', err);
-        showError(errorEl, 'Error de conexión. Intenta de nuevo.');
-        btn.disabled = false;
-        btn.textContent = originalText;
-      });
-    }
-
-    // Quitar pulso de todos los inputs del waitlist al hacer focus en cualquiera
-    const pulseInputs = document.querySelectorAll('#waitlist-form .input-pulse');
-    pulseInputs.forEach(input => {
-      input.addEventListener('focus', () => {
-        pulseInputs.forEach(i => i.classList.remove('input-pulse'));
-      });
-    });
-
-    // Limpiar error al escribir
-    document.querySelectorAll('input[type="email"]').forEach(input => {
-      input.addEventListener('input', () => {
-        const errorEl = input.closest('form').querySelector('[id$="email-error"], .cta-error');
-        if (errorEl) clearError(errorEl);
-        input.classList.remove('border-coral/60');
-      });
-    });
 
     // ── Modal de Contacto ─────────────────────────────────
     let _captchaA, _captchaB;
@@ -1073,6 +942,36 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeContactModal();
     });
+
+    // ── Countdown Timer ────────────────────────────────────
+    function updateCountdown() {
+      // Target: 30 de abril 2026 12:00 PM COT (UTC-5)
+      const launchDate = new Date(2026, 3, 30, 12, 0, 0);
+      launchDate.setHours(launchDate.getHours() - 5); // Adjust for COT (UTC-5)
+
+      const now = new Date();
+      const diff = launchDate - now;
+
+      if (diff <= 0) {
+        // Countdown finished
+        document.getElementById('countdown-container').style.display = 'none';
+        document.getElementById('launch-ready').classList.remove('hidden');
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown-dias').textContent = String(days).padStart(2, '0');
+      document.getElementById('countdown-horas').textContent = String(hours).padStart(2, '0');
+      document.getElementById('countdown-min').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('countdown-seg').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 
 </body>
