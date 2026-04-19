@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+Sitemap: https://idoneapp.com/sitemap.xml
