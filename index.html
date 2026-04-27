@@ -218,7 +218,7 @@
   <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between backdrop-blur-md bg-black/40 border-b border-white/5">
     <div class="flex items-center gap-3">
       <img src="icon.png" alt="idoneApp" class="w-9 h-9 rounded-xl" />
-      <span class="text-lg tracking-tight"><span class="font-light">idone</span><span class="font-bold">App</span></span>
+      <span class="text-lg tracking-tight font-bold">idoneApp</span>
     </div>
     <!-- Nav links — ocultos en móvil -->
     <div id="nav-links" class="items-center gap-6 text-sm text-white/55 font-medium">
@@ -250,7 +250,7 @@
       <div class="flex items-center justify-between mb-8">
         <div class="flex items-center gap-3">
           <img src="icon.png" alt="idoneApp" class="w-10 h-10 rounded-xl" />
-          <span class="text-lg tracking-tight"><span class="font-light">idone</span><span class="font-bold">App</span></span>
+          <span class="text-lg tracking-tight font-bold">idoneApp</span>
         </div>
         <button onclick="closeMenu()" aria-label="Cerrar menú"
           style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);font-size:20px;cursor:pointer;">
@@ -292,7 +292,7 @@
 
       <!-- Headline -->
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 delay-1">
-        Encuentra tu ayuda<br />
+        Encuentra tu pareja<br />
         <em class="gradient-text" style="font-family: 'Playfair Display', serif; font-style: italic;">idónea</em>
         <span> en la fe</span>
       </h1>
@@ -930,8 +930,8 @@
 
     // ── Countdown Timer ────────────────────────────────────
     function updateCountdown() {
-      // Target: 30 de abril 2026 12:00 PM COT (UTC-5)
-      const launchDate = new Date(2026, 3, 30, 12, 0, 0);
+      // Target: 30 de abril 2026 7:00 PM COT (UTC-5)
+      const launchDate = new Date(2026, 3, 30, 19, 0, 0);
       launchDate.setHours(launchDate.getHours() - 5); // Adjust for COT (UTC-5)
 
       const now = new Date();
