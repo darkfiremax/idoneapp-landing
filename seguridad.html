@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seguridad — IdoneApp</title>
+  <link rel="icon" type="image/png" href="/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            primary: '#4A1060',
+            background: '#FAF7F2',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAF7F2; color: #1A1A1A; }
+    .legal-content h2 { 
+      color: #4A1060; 
+      font-weight: 800; 
+      font-size: 1.25rem; 
+      margin-top: 2.5rem; 
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid rgba(74, 16, 96, 0.1);
+      padding-bottom: 0.5rem;
+    }
+    .legal-content p, .legal-content li { 
+      color: #4A4A4A; 
+      line-height: 1.6; 
+      margin-bottom: 1rem;
+    }
+    .legal-content ul { list-style-type: none; padding-left: 0; margin-bottom: 1rem; }
+    .legal-content .check { color: #10B981; font-weight: bold; margin-right: 0.5rem; }
+    .legal-content .arrow { color: #4A1060; font-weight: bold; margin-right: 0.5rem; }
+    .alert-box {
+      background-color: #FFFBEB;
+      border-left: 4px solid #F59E0B;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <!-- Header / Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#FAF7F2]/80 backdrop-blur-md border-b border-black/5 px-6 py-4">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 text-primary/60 hover:text-primary transition-colors font-bold text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+        Volver
+      </a>
+      <div class="flex items-center gap-2">
+        <img src="icon.png" alt="IdoneApp" class="w-8 h-8 rounded-lg" />
+        <span class="font-bold text-primary tracking-tight">IdoneApp</span>
+      </div>
+      <div class="w-16"></div>
+    </div>
+  </header>
+
+  <main class="pt-32 pb-20 px-6">
+    <article class="max-w-3xl mx-auto">
+      <h1 class="text-4xl font-extrabold text-primary mb-2 tracking-tight">Tu seguridad es nuestra prioridad</h1>
+      <p class="text-lg text-gray-500 mb-12 tracking-tight">En IdoneApp, trabajamos cada día para crear un espacio seguro y confiable para nuestra comunidad.</p>
+
+      <div class="legal-content">
+        <h2>1. VERIFICACIÓN DE PERFILES</h2>
+        <ul>
+          <li><span class="check">✓</span> Cada foto es revisada manualmente antes de aparecer en la app</li>
+          <li><span class="check">✓</span> Perfiles verificados tienen badge ✓</li>
+          <li><span class="check">✓</span> Reportes son revisados en menos de 24h</li>
+          <li><span class="check">✓</span> Cuentas sospechosas son suspendidas inmediatamente</li>
+        </ul>
+
+        <h2>2. ANTES DE CONOCER A ALGUIEN</h2>
+        <ul>
+          <li><span class="arrow">→</span> Conócelo bien dentro de la app primero</li>
+          <li><span class="arrow">→</span> Primera cita siempre en lugar público</li>
+          <li><span class="arrow">→</span> Cuéntale a alguien de adónde vas</li>
+          <li><span class="arrow">→</span> Usa tu propio transporte</li>
+          <li><span class="arrow">→</span> No compartas dirección de casa o trabajo hasta conocerlo bien</li>
+        </ul>
+
+        <h2>3. SEÑALES DE ALERTA</h2>
+        <p>Desconfía si alguien:</p>
+        <ul>
+          <li><span class="arrow">→</span> Pide dinero o ayuda financiera</li>
+          <li><span class="arrow">→</span> Dice estar en el extranjero con urgencia</li>
+          <li><span class="arrow">→</span> Presiona para salir del chat de la app</li>
+          <li><span class="arrow">→</span> Sus historias son inconsistentes</li>
+          <li><span class="arrow">→</span> Pide información personal muy rápido</li>
+        </ul>
+
+        <h2>4. NUNCA COMPARTAS</h2>
+        <ul>
+          <li><span class="arrow">→</span> Información bancaria o de tarjetas</li>
+          <li><span class="arrow">→</span> Contraseñas</li>
+          <li><span class="arrow">→</span> Número de cédula</li>
+          <li><span class="arrow">→</span> Dirección exacta de tu casa</li>
+        </ul>
+
+        <h2>5. CÓMO REPORTAR</h2>
+        <p>Desde cualquier perfil toca los 3 puntos ··· y selecciona "Reportar"</p>
+        <p>O escríbenos a: <a href="mailto:info@idoneapp.com" class="text-primary font-bold hover:underline">info@idoneapp.com</a></p>
+        <div class="alert-box">
+          <p class="mb-0 font-medium text-amber-900">Todos los reportes son confidenciales. Actuamos en menos de 24 horas.</p>
+        </div>
+
+        <h2>6. EN CASO DE EMERGENCIA</h2>
+        <p>Si sientes que estás en peligro:</p>
+        <ul>
+          <li><span class="arrow">→</span> Llama al <strong>123</strong> (Policía Colombia)</li>
+          <li><span class="arrow">→</span> Línea <strong>155</strong> (Fiscalía)</li>
+          <li><span class="arrow">→</span> Escríbenos: <a href="mailto:info@idoneapp.com" class="text-primary font-bold hover:underline">info@idoneapp.com</a></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+
+  <footer class="py-12 px-6 border-t border-black/5 bg-[#FAF7F2]">
+    <div class="max-w-4xl mx-auto flex flex-col items-center gap-6 text-black/40 text-sm">
+      <div class="flex flex-col sm:flex-row items-center justify-between w-full gap-6">
+        <div class="flex items-center gap-3">
+          <img src="icon.png" alt="idoneApp" class="w-8 h-8 rounded-lg opacity-70" />
+          <div class="flex flex-col">
+            <span class="text-primary/70 font-bold">idoneApp &middot; 2026</span>
+            <span class="text-xs opacity-50">Proyecto independiente de miembros adventistas colombianos</span>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+          <a href="/terminos" class="hover:text-primary transition-colors">Términos</a>
+          <a href="/privacidad" class="hover:text-primary transition-colors">Privacidad</a>
+          <a href="/seguridad" class="hover:text-primary transition-colors">Seguridad</a>
+          <a href="mailto:info@idoneapp.com" class="hover:text-primary transition-colors">Contacto</a>
+          <a href="https://instagram.com/idone.app" target="_blank" class="hover:text-primary transition-colors">@idone.app</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

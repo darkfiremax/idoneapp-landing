@@ -1,3 +1,9 @@
 {
-  "version": 2
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/terminos", "destination": "/terminos.html" },
+    { "source": "/privacidad", "destination": "/privacidad.html" },
+    { "source": "/seguridad", "destination": "/seguridad.html" }
+  ]
 }

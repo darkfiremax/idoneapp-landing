@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidad — IdoneApp</title>
+  <link rel="icon" type="image/png" href="/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            primary: '#4A1060',
+            background: '#FAF7F2',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAF7F2; color: #1A1A1A; }
+    .legal-content h2 { 
+      color: #4A1060; 
+      font-weight: 800; 
+      font-size: 1.25rem; 
+      margin-top: 2.5rem; 
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid rgba(74, 16, 96, 0.1);
+      padding-bottom: 0.5rem;
+    }
+    .legal-content p, .legal-content li { 
+      color: #4A4A4A; 
+      line-height: 1.6; 
+      margin-bottom: 1rem;
+    }
+    .legal-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+    .info-box {
+      background: white;
+      border: 1px solid rgba(74, 16, 96, 0.1);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <!-- Header / Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#FAF7F2]/80 backdrop-blur-md border-b border-black/5 px-6 py-4">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 text-primary/60 hover:text-primary transition-colors font-bold text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+        Volver
+      </a>
+      <div class="flex items-center gap-2">
+        <img src="icon.png" alt="IdoneApp" class="w-8 h-8 rounded-lg" />
+        <span class="font-bold text-primary tracking-tight">IdoneApp</span>
+      </div>
+      <div class="w-16"></div>
+    </div>
+  </header>
+
+  <main class="pt-32 pb-20 px-6">
+    <article class="max-w-3xl mx-auto">
+      <h1 class="text-4xl font-extrabold text-primary mb-2 tracking-tight">Política de Privacidad</h1>
+      <p class="text-sm text-gray-500 mb-12">Última actualización: 30 de abril de 2026</p>
+
+      <div class="legal-content">
+        <p class="mb-10 text-lg opacity-70">En IdoneApp nos tomamos muy en serio la privacidad de nuestra comunidad. Esta política explica qué información recopilamos y cómo la protegemos bajo la <strong class="text-primary font-bold">Ley 1581 de 2012</strong> de Colombia.</p>
+
+        <h2>1. RESPONSABLE DEL TRATAMIENTO</h2>
+        <div class="info-box">
+          <p class="mb-1 font-bold text-primary">IdoneApp</p>
+          <p class="mb-1">Medellín, Colombia</p>
+          <p class="mb-1"><a href="mailto:info@idoneapp.com" class="text-primary font-bold hover:underline">info@idoneapp.com</a></p>
+        </div>
+
+        <h2>2. DATOS QUE RECOPILAMOS</h2>
+        <p>Recopilamos la información necesaria para el funcionamiento del servicio y la seguridad de la comunidad:</p>
+        <ul>
+          <li><strong>Información de Perfil:</strong> Nombre, fecha de nacimiento, género y fotos de perfil.</li>
+          <li><strong>Datos de Contacto:</strong> Correo electrónico.</li>
+          <li><strong>Información de Fe:</strong> Iglesia local, asociación y unión adventista a la que perteneces.</li>
+          <li><strong>Estilo de Vida:</strong> Preferencias de dieta, valores y lo que escribes en tu biografía.</li>
+          <li><strong>Ubicación:</strong> Ciudad y región aproximada (vía GPS cuando lo autorizas).</li>
+          <li><strong>Uso:</strong> Datos de actividad (swipes, matches) y mensajes en el chat.</li>
+        </ul>
+
+        <h2>3. PARA QUÉ USAMOS TUS DATOS</h2>
+        <ul>
+          <li>Crear y gestionar tu perfil público dentro de la plataforma.</li>
+          <li>Hacer matching dinámico con otros usuarios según tus preferencias.</li>
+          <li>Verificar que eres miembro activo de la iglesia adventista (a través de nuestro sistema de moderación).</li>
+          <li>Enviarte notificaciones importantes sobre tu cuenta o mensajes recibidos.</li>
+          <li>Cumplir con obligaciones legales y proteger la seguridad de los usuarios.</li>
+        </ul>
+
+        <h2>4. DATOS SENSIBLES</h2>
+        <p>"La información sobre creencias religiosas es considerada un dato sensible según la Ley 1581 de 2012. Al registrarse y completar su perfil, el usuario autoriza expresamente el tratamiento de este dato para el funcionamiento esencial del servicio de IdoneApp."</p>
+
+        <h2>5. CÓMO PROTEGEMOS TU INFORMACIÓN</h2>
+        <p>Implementamos medidas técnicas y administrativas para proteger tus datos:</p>
+        <ul>
+          <li><strong>Almacenamiento Seguro:</strong> Usamos Supabase para nuestra base de datos con cifrado de alto nivel.</li>
+          <li><strong>Privacidad de Fotos:</strong> Tus fotos solo son visibles para usuarios verificados dentro de la app. Usamos URLs firmadas y temporales para que no sean accesibles públicamente.</li>
+          <li><strong>Privacidad de Chat:</strong> Los mensajes son privados. Solo accedemos a ellos bajo reporte formal de abuso para fines de moderación.</li>
+          <li><strong>Proveedores Técnicos:</strong> Trabajamos con proveedores que cumplen con estándares de confidencialidad (Supabase, MercadoPago). NUNCA vendemos tus datos a terceros ni los usamos para publicidad externa.</li>
+        </ul>
+
+        <h2>6. TUS DERECHOS (Habeas Data)</h2>
+        <p>Como titular de datos en Colombia tienes derecho a conocer, actualizar, rectificar y suprimir tus datos personales. Para ejercer estos derechos, escríbenos a <a href="mailto:info@idoneapp.com" class="text-primary font-bold hover:underline">info@idoneapp.com</a>. Respondemos a tu solicitud en un plazo máximo de 15 días hábiles.</p>
+
+        <h2>7. RETENCIÓN Y ELIMINACIÓN</h2>
+        <ul>
+          <li><strong>Cuenta Activa:</strong> Conservamos tus datos mientras mantengas tu cuenta.</li>
+          <li><strong>Cuenta Eliminada:</strong> Al eliminar tu cuenta, borramos tus datos personales y fotos en un plazo de 30 días hábiles.</li>
+          <li><strong>Excepciones:</strong> Conservaremos registros básicos de moderación o datos exigidos por la ley colombiana si existe un requerimiento judicial.</li>
+        </ul>
+
+        <h2>8. MENORES DE EDAD</h2>
+        <p>IdoneApp está prohibida para menores de 18 años. Si detectamos un usuario menor, eliminamos su cuenta y datos inmediatamente sin previo aviso.</p>
+
+        <h2>9. CAMBIOS A ESTA POLÍTICA</h2>
+        <p>Podemos actualizar esta política ocasionalmente. Te notificaremos por correo electrónico sobre cualquier cambio significativo. El uso continuado del servicio implica la aceptación de la nueva política.</p>
+
+        <h2>10. CONTACTO</h2>
+        <p>Si tienes preguntas sobre tu privacidad o el tratamiento de tus datos, escríbenos a:<br/>
+        <a href="mailto:info@idoneapp.com" class="text-primary font-bold hover:underline">info@idoneapp.com</a></p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="py-12 px-6 border-t border-black/5 bg-[#FAF7F2]">
+    <div class="max-w-4xl mx-auto flex flex-col items-center gap-6 text-black/40 text-sm">
+      <div class="flex flex-col sm:flex-row items-center justify-between w-full gap-6">
+        <div class="flex items-center gap-3">
+          <img src="icon.png" alt="idoneApp" class="w-8 h-8 rounded-lg opacity-70" />
+          <div class="flex flex-col">
+            <span class="text-primary/70 font-bold">idoneApp &middot; 2026</span>
+            <span class="text-xs opacity-50">Proyecto independiente de miembros adventistas colombianos</span>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+          <a href="/terminos" class="hover:text-primary transition-colors">Términos</a>
+          <a href="/privacidad" class="hover:text-primary transition-colors">Privacidad</a>
+          <a href="/seguridad" class="hover:text-primary transition-colors">Seguridad</a>
+          <a href="mailto:info@idoneapp.com" class="hover:text-primary transition-colors">Contacto</a>
+          <a href="https://instagram.com/idone.app" target="_blank" class="hover:text-primary transition-colors">@idone.app</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
