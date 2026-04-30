@@ -286,8 +286,8 @@
 
       <!-- Badge -->
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-coral/10 border border-coral/20 text-coral text-sm font-semibold mb-8 fade-in">
-        <span class="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-        Próximamente &middot; Pre-lanzamiento
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Ahora disponible &middot; ¡Únete gratis!
       </div>
 
       <!-- Headline -->
@@ -303,36 +303,16 @@
         Conecta con quien comparte tu fe, tus valores y tu estilo de vida.
       </p>
 
-      <!-- Countdown & Entry -->
-      <div id="waitlist" class="delay-3">
-        
-        <!-- Main Entry (Hidden) -->
-
-        <!-- Countdown blocks (Hidden at 7 PM) -->
-        <div id="countdown-container" class="flex items-center justify-center gap-4 sm:gap-6 mb-8 opacity-80">
-          <div class="flex flex-col items-center">
-            <div class="text-4xl sm:text-6xl font-extrabold" id="countdown-dias" style="color: #C9963A;">00</div>
-            <p class="text-white/60 text-xs sm:text-sm mt-2 font-bold tracking-widest">DÍAS</p>
-          </div>
-          <div class="text-white/30 text-3xl sm:text-5xl font-light">:</div>
-          <div class="flex flex-col items-center">
-            <div class="text-4xl sm:text-6xl font-extrabold" id="countdown-horas" style="color: #C9963A;">00</div>
-            <p class="text-white/60 text-xs sm:text-sm mt-2 font-bold tracking-widest">HORAS</p>
-          </div>
-          <div class="text-white/30 text-3xl sm:text-5xl font-light">:</div>
-          <div class="flex flex-col items-center">
-            <div class="text-4xl sm:text-6xl font-extrabold" id="countdown-min" style="color: #C9963A;">00</div>
-            <p class="text-white/60 text-xs sm:text-sm mt-2 font-bold tracking-widest">MIN</p>
-          </div>
-          <div class="text-white/30 text-3xl sm:text-5xl font-light">:</div>
-          <div class="flex flex-col items-center">
-            <div class="text-4xl sm:text-6xl font-extrabold" id="countdown-seg" style="color: #C9963A;">00</div>
-            <p class="text-white/60 text-xs sm:text-sm mt-2 font-bold tracking-widest">SEG</p>
-          </div>
-        </div>
-
-        <!-- Countdown Footer Text -->
-        <p id="countdown-footer" class="text-white/40 text-xs mt-1">Lanzamiento web oficial hoy 7:00 PM</p>
+      <!-- Auth Buttons -->
+      <div id="auth-buttons" class="flex flex-col sm:flex-row items-center justify-center gap-4 delay-3">
+        <a href="https://idoneapp.com/login" target="_blank" rel="noopener"
+          class="px-8 py-4 rounded-2xl bg-white/10 border border-white/20 text-white font-bold text-sm transition-all hover:bg-white/15 hover:border-white/30 active:scale-95">
+          Iniciar sesión
+        </a>
+        <a href="https://idoneapp.com/register" target="_blank" rel="noopener"
+          class="px-8 py-4 rounded-2xl bg-coral hover:bg-[#b85d5d] text-white font-bold text-sm transition-all glow-coral active:scale-95">
+          Registrarse →
+        </a>
       </div>
 
       <!-- Dots del carrusel -->
@@ -929,37 +909,17 @@
 
     // ── Confetti Celebration & Persistence ──────────────────
     let celebrationTriggered = false;
-    const brandColors = ['#FF6B6B', '#A855F7', '#FFD93D', '#FF8E8E', '#6E2191']; // Brighter, more vivid colors
+    const brandColors = ['#FF6B6B', '#A855F7', '#FFD93D', '#FF8E8E', '#6E2191'];
 
     function updateCountdown() {
       const launchDate = new Date('2026-04-30T19:00:00-05:00');
       const now = new Date();
       const diff = launchDate - now;
 
-      if (diff <= 0) {
-        // Hide countdown elements
-        document.getElementById('countdown-container').style.display = 'none';
-        document.getElementById('countdown-footer').style.display = 'none';
-        
-        // Show entry text
-        document.getElementById('post-launch-text').classList.remove('hidden');
-        
-        if (!celebrationTriggered) {
-          celebrationTriggered = true;
-          triggerBigCelebration();
-        }
-        return;
+      if (diff <= 0 && !celebrationTriggered) {
+        celebrationTriggered = true;
+        triggerBigCelebration();
       }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      document.getElementById('countdown-dias').textContent = String(days).padStart(2, '0');
-      document.getElementById('countdown-horas').textContent = String(hours).padStart(2, '0');
-      document.getElementById('countdown-min').textContent = String(minutes).padStart(2, '0');
-      document.getElementById('countdown-seg').textContent = String(seconds).padStart(2, '0');
     }
 
     // Persistent subtle effect (on top of everything)
@@ -1007,15 +967,11 @@
       }, 250);
     }
 
-    // Initialize
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-    
-    // Start persistent effect immediately
+    // Initialize - launch has already happened
     if (typeof confetti !== 'undefined') {
-      runPersistentConfetti();
+      triggerBigCelebration();
     } else {
-      window.onload = runPersistentConfetti;
+      window.onload = triggerBigCelebration;
     }
   </script>
   
