@@ -10,6 +10,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(__dirname));
 
+// Rewrites (migrated from vercel.json)
+app.get("/terminos", (req, res) => res.sendFile(path.join(__dirname, "terminos.html")));
+app.get("/privacidad", (req, res) => res.sendFile(path.join(__dirname, "privacidad.html")));
+app.get("/seguridad", (req, res) => res.sendFile(path.join(__dirname, "seguridad.html")));
+
 // API routes
 app.get("/api/count", async (req, res) => {
   const { default: handler } = await import("./api/count.js");
@@ -21,9 +26,9 @@ app.post("/api/subscribe", async (req, res) => {
   return handler(req, res);
 });
 
-// Fallback to index.html
+// Fallback to 404.html
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.status(404).sendFile(path.join(__dirname, "404.html"));
 });
 
 app.listen(PORT, () => {

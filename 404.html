@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Página no encontrada | idoneApp</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #14051C;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #E8A0A0 0%, #C96868 50%, #7B3F9E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .glow {
+      box-shadow: 0 0 50px rgba(201, 104, 104, 0.2);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-6 text-white text-center">
+  <div class="relative z-10 max-w-lg">
+    <img src="icon.png" alt="idoneApp" class="w-20 h-20 mx-auto mb-8 rounded-2xl floating">
+    <h1 class="text-8xl font-extrabold mb-4 opacity-20">404</h1>
+    <h2 class="text-3xl sm:text-4xl font-bold mb-6">
+      Parece que te has <br/>
+      <em class="gradient-text font-serif italic" style="font-family: 'Playfair Display', serif;">desviado</em> del camino
+    </h2>
+    <p class="text-white/50 text-lg mb-10 leading-relaxed">
+      La página que buscas no existe o ha sido movida. Pero no te preocupes, lo importante es encontrar a la persona idónea.
+    </p>
+    <a href="/" class="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-[#C96868] hover:bg-[#b85d5d] text-white font-bold transition-all active:scale-95 shadow-xl shadow-coral/20">
+      Volver al inicio
+    </a>
+  </div>
+
+  <!-- Fondo sutil decorativo -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-coral/10 rounded-full blur-[120px]"></div>
+  </div>
+</body>
+</html>
