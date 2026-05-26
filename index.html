@@ -7,9 +7,17 @@
   <link rel="icon" type="image/png" href="/icon.png" />
   <link rel="apple-touch-icon" href="/icon.png" />
   <link rel="preload" as="image" href="images/1.1.webp" />
-  <!-- Microsoft Clarity -->
+  <!-- Microsoft Clarity — carga condicional según consentimiento de cookies -->
   <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w88rj5whnn");
+    window.__loadClarity = function() {
+      if (window.__clarityLoaded) return;
+      window.__clarityLoaded = true;
+      (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w88rj5whnn");
+    };
+    // Cargar solo si ya había aceptado previamente
+    if (localStorage.getItem('idoneapp_cookies') === 'accepted') {
+      window.__loadClarity();
+    }
   </script>
   <meta name="description" content="La primera app de citas para adventistas colombianos. Conexiones reales, valores compartidos. Conectar siempre será gratis." />
 
@@ -473,6 +481,7 @@
             <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Crear perfil</li>
             <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Ver perfiles</li>
             <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Conoce 25 personas al día</li>
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Rewind 5 veces al día</li>
             <li class="flex items-center gap-2"><span class="text-white/25 font-bold">✗</span> <span class="text-white/30">Personas sin límite diario</span></li>
             <li class="flex items-center gap-2"><span class="text-white/25 font-bold">✗</span> <span class="text-white/30">Ver quién te dio like</span></li>
             <li class="flex items-center gap-2"><span class="text-white/25 font-bold">✗</span> <span class="text-white/30">Filtros avanzados</span></li>
@@ -513,6 +522,7 @@
           <ul class="space-y-3 text-sm text-white/80 mb-8">
             <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Todo lo del plan gratis</li>
             <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Personas sin límite diario</li>
+            <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Rewind ilimitado</li>
             <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Ver quién te dio like</li>
             <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Filtros avanzados *</li>
             <li class="flex items-center gap-2"><span class="text-coral font-bold">✓</span> Verificación de perfil</li>
@@ -1090,8 +1100,17 @@
       0%, 100% { transform: translateY(0); }
       50%      { transform: translateY(-5px); }
     }
-    @media (max-width: 480px) {
-      .wa-fab { bottom: 16px; right: 12px; }
+    /* Mobile: centro vertical, lado derecho — no tapa botones de la hero */
+    @media (max-width: 767px) {
+      .wa-fab {
+        bottom: auto;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%) scale(1);
+        transition: opacity .2s ease;
+      }
+      .wa-fab.wa-visible { opacity: 1; transform: translateY(-50%) scale(1); }
+      .wa-bubble { display: none !important; } /* Ocultar tooltip en móvil */
       .wa-btn { width: 52px; height: 52px; }
     }
   </style>
@@ -1105,6 +1124,44 @@
       <img src="/images/whatsapp.png" alt="" width="58" height="58" decoding="async">
     </button>
   </div>
+
+  <!-- Cookie consent banner — Microsoft Clarity (carga solo si aceptado) -->
+  <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:10000;background:#1A1A1A;color:#F5F5F5;padding:16px 24px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;line-height:1.5;box-shadow:0 -2px 16px rgba(0,0,0,0.3);">
+    <div style="max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:12px;">
+      <p style="flex:1;min-width:240px;margin:0;color:#D1D5DB;">
+        Usamos cookies propias esenciales y, opcionalmente, cookies de análisis (<strong style="color:#F5F5F5;">Microsoft Clarity</strong>) para mejorar la experiencia. Podés rechazar las no esenciales sin perder ninguna función.
+        <a href="/privacidad" style="color:#C084FC;text-decoration:underline;margin-left:4px;">Ver política</a>
+      </p>
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button onclick="window.__rejectCookies()" style="padding:8px 16px;background:transparent;border:1px solid #6B7280;border-radius:8px;color:#9CA3AF;font-size:12px;font-weight:600;cursor:pointer;">Rechazar no esenciales</button>
+        <button onclick="window.__acceptCookies()" style="padding:8px 20px;background:#4A1060;border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;">Aceptar todo</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var PREF_KEY = 'idoneapp_cookies';
+      var banner = document.getElementById('cookieBanner');
+      var pref = localStorage.getItem(PREF_KEY);
+
+      // Show banner only on first visit (no preference set yet)
+      if (!pref) {
+        banner.style.display = 'block';
+      }
+
+      window.__acceptCookies = function() {
+        localStorage.setItem(PREF_KEY, 'accepted');
+        banner.style.display = 'none';
+        window.__loadClarity(); // Load Clarity only after explicit acceptance
+      };
+
+      window.__rejectCookies = function() {
+        localStorage.setItem(PREF_KEY, 'rejected');
+        banner.style.display = 'none';
+        // Clarity is NOT loaded — no action needed
+      };
+    })();
+  </script>
 
   <script>
     (function () {
