@@ -76,7 +76,7 @@
   <main class="pt-32 pb-20 px-6">
     <article class="max-w-3xl mx-auto">
       <h1 class="text-4xl font-extrabold text-primary mb-2 tracking-tight">Política de Privacidad</h1>
-      <p class="text-sm text-gray-500 mb-12">Última actualización: 30 de abril de 2026</p>
+      <p class="text-sm text-gray-500 mb-12">Última actualización: 27 de mayo de 2026</p>
 
       <div class="legal-content">
         <p class="mb-10 text-lg opacity-70">En IdoneApp nos tomamos muy en serio la privacidad de nuestra comunidad. Esta política explica qué información recopilamos y cómo la protegemos bajo la <strong class="text-primary font-bold">Ley 1581 de 2012</strong> y el <strong class="text-primary font-bold">Decreto 1377 de 2013</strong> de Colombia.</p>
@@ -103,8 +103,12 @@
           <li><strong>Estilo de vida:</strong> Dieta, intereses, ministerios, biografía y preferencias de pareja.</li>
           <li><strong>Ubicación:</strong> Ciudad y región aproximada (vía GPS cuando el usuario lo autoriza expresamente).</li>
           <li><strong>Datos de uso:</strong> Swipes, matches, mensajes del chat y actividad de sesión.</li>
-          <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo y sistema operativo (para seguridad y diagnóstico de errores).</li>
+          <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo, sistema operativo, identificador único de instalación de la app (para seguridad, push notifications y diagnóstico de errores).</li>
         </ul>
+
+        <p><strong>Identificadores publicitarios:</strong> IdoneApp no recolecta, accede ni utiliza identificadores publicitarios (Android Advertising ID o IDFA). No mostramos publicidad de terceros dentro de la app ni en la web.</p>
+
+        <p><strong>Mensajes de chat:</strong> Los mensajes intercambiados entre usuarios se almacenan cifrados en reposo en nuestra base de datos. No están cifrados de extremo a extremo, lo cual permite que el equipo de moderación pueda revisar conversaciones únicamente en los casos descritos en la sección 5 (reportes formales, investigación de conducta inapropiada).</p>
 
         <h2>3. FINALIDADES DEL TRATAMIENTO</h2>
         <p>Los datos recopilados son usados exclusivamente para:</p>
@@ -112,10 +116,11 @@
           <li>Crear y gestionar tu perfil dentro de la plataforma.</li>
           <li>Hacer matching dinámico con otros usuarios según tus preferencias de pareja.</li>
           <li>Verificar que perteneces a la comunidad adventista mediante nuestro sistema de moderación manual.</li>
-          <li>Enviarte notificaciones de matches, mensajes y actualizaciones del servicio.</li>
+          <li>Enviarte notificaciones de matches, mensajes y actualizaciones del servicio (vía push notifications, email y notificaciones in-app).</li>
           <li>Investigar reportes de conducta inapropiada y moderar la comunidad.</li>
-          <li>Procesar pagos de suscripción Premium a través de MercadoPago.</li>
+          <li>Procesar pagos de suscripción Premium a través de MercadoPago (web) o las pasarelas nativas (Google Play Billing en Android, Apple In-App Purchase en iOS) según el canal desde donde el usuario realiza la compra.</li>
           <li>Mejorar el servicio mediante análisis estadísticos con <strong>datos anonimizados</strong> (nunca se analizan conversaciones privadas con este fin).</li>
+          <li>Diagnosticar errores y caídas de la aplicación mediante monitoreo automatizado.</li>
           <li>Cumplir con obligaciones legales y responder a requerimientos de autoridad competente.</li>
         </ul>
 
@@ -140,10 +145,21 @@
           <li><strong>Otros usuarios:</strong> Tu perfil público (nombre, fotos, iglesia, ciudad, intereses, bio) es visible para otros usuarios registrados y verificados dentro de la app. No es indexado públicamente en internet.</li>
           <li><strong>Supabase (EE.UU.):</strong> Proveedor de base de datos y autenticación. Actúa como encargado del tratamiento bajo acuerdo de confidencialidad. <a href="https://supabase.com/privacy" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
           <li><strong>Cloudflare (EE.UU.):</strong> Protección de red y CDN. Procesa tráfico de forma anónima para seguridad. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
-          <li><strong>MercadoPago (Argentina/Colombia):</strong> Procesador de pagos Premium. Recibe únicamente los datos mínimos necesarios para completar la transacción. <a href="https://www.mercadopago.com.co/privacidad" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
-          <li><strong>Microsoft Clarity (EE.UU.):</strong> Herramienta de análisis de comportamiento en el sitio web público (heatmaps, sesiones anonimizadas). No aplica a la app móvil ni accede a datos de cuenta. <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
-          <li><strong>No vendemos tus datos:</strong> Bajo ninguna circunstancia vendemos, arrendamos ni compartimos tu información personal con fines publicitarios o comerciales externos.</li>
+          <li><strong>MercadoPago (Argentina/Colombia):</strong> Procesador de pagos Premium para usuarios que pagan desde la versión web. Recibe únicamente los datos mínimos necesarios para completar la transacción. <a href="https://www.mercadopago.com.co/ayuda/privacidad" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
+          <li><strong>Google Play Billing (EE.UU.):</strong> Procesa los pagos de suscripción Premium realizados desde dispositivos Android. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
+          <li><strong>Apple In-App Purchase (EE.UU.):</strong> Procesa los pagos de suscripción Premium realizados desde dispositivos iOS. <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
+          <li><strong>RevenueCat (EE.UU.):</strong> Plataforma de gestión de suscripciones para la app móvil. Recibe identificador único de usuario y eventos de suscripción (compra, renovación, cancelación). No tiene acceso a métodos de pago ni datos personales adicionales. <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
+          <li><strong>Expo (EE.UU.):</strong> Servicio de notificaciones push para la app móvil. Recibe el token de notificación del dispositivo y el contenido de la notificación (sin información sensible de la conversación). <a href="https://expo.dev/privacy" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
+          <li><strong>Sentry (EE.UU.):</strong> Servicio de monitoreo de errores. Recibe stack traces, información de dispositivo y tipo de error en caso de fallos en la app. No tiene acceso a contenido de mensajes ni datos sensibles. <a href="https://sentry.io/privacy/" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
+          <li><strong>Microsoft Clarity (EE.UU.):</strong> Herramienta de análisis de comportamiento. En la web pública recolecta heatmaps y grabaciones de sesión anonimizadas. En la app móvil registra eventos anónimos de uso (pantallas visitadas, acciones realizadas) sin capturar contenido de campos sensibles ni mensajes privados. <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
+          <li><strong>Brevo (Francia):</strong> Proveedor de envío de correos transaccionales (notificaciones de match, recordatorios de mensajes, comunicación administrativa). Recibe correo electrónico del destinatario y contenido del mensaje. <a href="https://www.brevo.com/legal/privacypolicy/" target="_blank" rel="noopener" class="text-primary hover:underline">Política de privacidad</a>.</li>
         </ul>
+
+        <p><strong>No vendemos tus datos:</strong> Bajo ninguna circunstancia vendemos, arrendamos ni compartimos tu información personal con fines publicitarios o comerciales externos.</p>
+
+        <h2>6.1 TRANSFERENCIA INTERNACIONAL DE DATOS</h2>
+        <p>Algunos de nuestros proveedores tecnológicos (Supabase, Cloudflare, Sentry, Microsoft Clarity, Expo, RevenueCat, Google Play, Apple) están ubicados en Estados Unidos, país que no figura en la lista de países con nivel adecuado de protección según la Superintendencia de Industria y Comercio de Colombia.</p>
+        <p>Para garantizar el tratamiento seguro de tus datos en estas transferencias, aplicamos cláusulas contractuales tipo con cada proveedor y solo compartimos la información mínima necesaria para la prestación del servicio. Al aceptar esta política, autorizas expresamente estas transferencias internacionales conforme al Art. 26 de la Ley 1581 de 2012.</p>
 
         <h2>7. CÓMO PROTEGEMOS TU INFORMACIÓN</h2>
         <p>Implementamos las siguientes medidas técnicas para proteger tus datos:</p>
@@ -178,10 +194,14 @@
         </ul>
 
         <h2>10. MENORES DE EDAD</h2>
-        <p>IdoneApp está estrictamente prohibida para menores de 18 años. No recopilamos conscientemente datos de menores. Si detectamos o recibimos un reporte de que un usuario es menor de edad, eliminamos su cuenta y todos sus datos de forma inmediata y sin previo aviso. Si eres padre o tutor y crees que tu hijo menor tiene una cuenta, escríbenos a <a href="mailto:legal@idoneapp.com" class="text-primary font-bold hover:underline">legal@idoneapp.com</a>.</p>
+        <p>IdoneApp está estrictamente prohibida para menores de 18 años. No recopilamos conscientemente datos de menores.</p>
+        <p><strong>Verificación de edad:</strong> Durante el registro solicitamos fecha de nacimiento. Los usuarios que declaran tener menos de 18 años son automáticamente rechazados por el sistema. Adicionalmente, durante la moderación manual, si detectamos o recibimos un reporte de que un usuario es menor de edad, eliminamos su cuenta y todos sus datos de forma inmediata y sin previo aviso.</p>
+        <p>Si eres padre o tutor y crees que tu hijo menor tiene una cuenta, escríbenos a <a href="mailto:legal@idoneapp.com" class="text-primary font-bold hover:underline">legal@idoneapp.com</a>.</p>
 
         <h2>11. CAMBIOS A ESTA POLÍTICA</h2>
-        <p>Podemos actualizar esta política ocasionalmente. Te notificaremos por correo electrónico sobre cualquier cambio significativo con al menos <strong>15 días de anticipación</strong>. Para cambios que afecten el tratamiento de datos sensibles (religión, fe), solicitaremos tu autorización expresa nuevamente — el uso continuado del servicio no es suficiente para ese tipo de cambios. Para cambios menores, el uso continuado después del período de notificación implica la aceptación.</p>
+        <p>Podemos actualizar esta política ocasionalmente. Te notificaremos por correo electrónico sobre cualquier cambio significativo con al menos <strong>15 días de anticipación</strong>.</p>
+        <p>Para cambios que afecten el tratamiento de datos sensibles (religión, fe), solicitaremos tu autorización expresa nuevamente. El uso continuado del servicio no es suficiente para ese tipo de cambios.</p>
+        <p>Para cambios menores, el uso continuado después del período de notificación implica la aceptación.</p>
 
         <h2>12. CONTACTO</h2>
         <p>Si tienes preguntas sobre tu privacidad o el tratamiento de tus datos, escríbenos a:</p>
