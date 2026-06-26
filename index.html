@@ -1191,5 +1191,36 @@
       });
     })();
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/1.0.35/ua-parser.min.js"></script>
+  <script>
+    (function () {
+      // Basic Custom Analytics Tracker
+      try {
+        var parser = new UAParser();
+        var result = parser.getResult();
+        
+        var payload = {
+          os: result.os.name || 'Unknown',
+          device_type: result.device.type || 'desktop',
+          browser: result.browser.name || 'Unknown',
+          source: 'landing_page'
+        };
+
+        // Enviar a Supabase (Silencioso)
+        fetch('https://getvsqzwayxadtcvhrod.supabase.co/rest/v1/analytics_events', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdldHZzcXp3YXl4YWR0Y3Zocm9kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NTcwMDMsImV4cCI6MjA5MDIzMzAwM30.9OjlPu3EUE24GOAeN90hOQpdMhlt_qjbsPrXdCGNt8k',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdldHZzcXp3YXl4YWR0Y3Zocm9kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NTcwMDMsImV4cCI6MjA5MDIzMzAwM30.9OjlPu3EUE24GOAeN90hOQpdMhlt_qjbsPrXdCGNt8k',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(payload)
+        }).catch(function(e) { /* ignore silently */ });
+      } catch (e) {
+        // ignore errors
+      }
+    })();
+  </script>
 </body>
 </html>
